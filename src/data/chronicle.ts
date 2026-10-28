@@ -14,3 +14,12 @@ export type StoryBook = Record<string, StoryScene[][]>;
 
 /** Satu bagian cerita. */
 export const scene = (title: string, text: string): StoryScene => ({ title, text });
+
+/** Prosa panjang satu periode: pengantar `story` dan bagian cerita yang menggantikan versi ringkas. */
+export interface PeriodProse {
+  story: string;
+  scenes: StoryScene[];
+}
+
+/** Prosa panjang per peradaban, urut sesuai indeks `territories`; `null` berarti periode itu memakai versi ringkas. */
+export type ProseBook = Record<string, (PeriodProse | null)[]>;

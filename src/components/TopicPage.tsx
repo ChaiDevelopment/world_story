@@ -2,6 +2,7 @@ import { useMemo, useRef, useState } from 'react';
 import { civById } from '../data';
 import { formatYear } from '../lib/time';
 import type { Topic, TopicEntry } from '../types';
+import PagedText, { paragraphs } from './PagedText';
 
 interface Props {
   topic: Topic;
@@ -10,8 +11,6 @@ interface Props {
   onSelectCiv: (id: string) => void;
   onFocusPlace: (place: { name: string; lon: number; lat: number }, year?: number) => void;
 }
-
-const paragraphs = (s: string) => s.split('\n\n').map((p) => p.trim()).filter(Boolean);
 
 /**
  * Halaman tema: satu bagian ditampilkan sekali waktu (chip untuk berpindah),
@@ -58,7 +57,7 @@ export default function TopicPage({ topic, onClose, onApplyYear, onSelectCiv, on
         </button>
         {isOpen && (
           <div className="t-entry-body">
-            {paragraphs(e.text).map((p, i) => <p key={i}>{p}</p>)}
+            <PagedText text={e.text} />
             {e.facts && e.facts.length > 0 && (
               <dl className="t-facts">
                 {e.facts.map(([k, v]) => (

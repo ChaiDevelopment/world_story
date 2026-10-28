@@ -414,7 +414,7 @@ export const nusantaraKingdoms: Civilization[] = [
     economy:
       'Pelabuhan Bima mengekspor kuda, kain, kayu sapan, dan hasil bumi, dan dahulu juga melakukan perdagangan budak. Kuda Bima yang kecil dan tangguh dihargai di Jawa dan Sulawesi, sedangkan rakyat bertani di dataran sekitar teluk.',
     religionCulture:
-      'Sebelum Islam, orang Bima mengenal kepercayaan Marapu dan pengaruh Hindu–Buddha dari Jawa. Setelah 1621, Islam membentuk adat, hukum, dan pusat belajar Bima, namun rimpu, uma lengge, dan tradisi Hanta Ua Pua tetap menjadi ciri budaya setempat.',
+      'Sebelum Islam, orang Bima mengenal kepercayaan asli Makamba-Makimbi (pemujaan roh leluhur atau parafu) dan pengaruh Hindu–Buddha dari Jawa. Setelah 1621, Islam membentuk adat, hukum, dan pusat belajar Bima, namun rimpu, uma lengge, dan tradisi Hanta Ua Pua tetap menjadi ciri budaya setempat.',
     decline:
       'Tambora 1815 mendatangkan kelaparan dan penyakit, dan perjanjian dengan VOC serta Hindia Belanda membatasi kedaulatan. Manggarai terlepas pada 1920, Sultan Muhammad Salahuddin mendukung Republik Indonesia pada 1945, dan swapraja dihapus pada 1958.',
     territories: [

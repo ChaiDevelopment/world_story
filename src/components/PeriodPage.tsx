@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { events, people } from '../data';
 import { formatRange, formatYear } from '../lib/time';
 import type { Civilization } from '../types';
+import PagedText from './PagedText';
 
 interface Props {
   civ: Civilization;
@@ -43,7 +44,7 @@ export default function PeriodPage({ civ, index, onIndex, onClose, onApplyYear }
       <div className="meta">{formatRange(t.from, t.to)}</div>
       <button className="chip" onClick={() => onApplyYear(t.from)}>Tampilkan wilayah ini di peta</button>
 
-      {t.story && <p className="period-story">{t.story}</p>}
+      {t.story && <PagedText key={`story-${index}`} text={t.story} className="period-story" />}
 
       <div className="tabs" role="tablist">
         {VIEWS.map((v) => (
@@ -60,7 +61,7 @@ export default function PeriodPage({ civ, index, onIndex, onClose, onApplyYear }
           {t.scenes?.map((s) => (
             <section key={s.title} className="scene">
               <h4>{s.title}</h4>
-              <p>{s.text}</p>
+              <PagedText text={s.text} />
             </section>
           ))}
           {chronicle.length > 0 && (

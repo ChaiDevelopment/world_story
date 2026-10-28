@@ -1,5 +1,5 @@
 import { topics } from '../src/data/topics/index';
-import { chronicleBook, civilizations, storyBook, events, people, tradeRoutes } from '../src/data/index';
+import { chronicleBook, civilizations, proseBook, storyBook, events, people, tradeRoutes } from '../src/data/index';
 
 let errors = 0;
 const fail = (m: string) => {
@@ -40,6 +40,17 @@ for (const [id, periods] of Object.entries(storyBook)) {
   if (!c) fail(`cerita: peradaban ${id} tidak dikenal`);
   else if (periods.length !== c.territories.length) fail(`cerita ${id}: ${periods.length} periode, wilayah ada ${c.territories.length}`);
 }
+for (const [id, periods] of Object.entries(proseBook)) {
+  const c = civilizations.find((x) => x.id === id);
+  if (!c) fail(`prosa: peradaban ${id} tidak dikenal`);
+  else if (periods.length !== c.territories.length) fail(`prosa ${id}: ${periods.length} periode, wilayah ada ${c.territories.length}`);
+  periods.forEach((p, i) => {
+    if (!p) return;
+    if (!p.story.trim()) fail(`prosa ${id}: periode ${i + 1} tanpa pengantar`);
+    if (!p.scenes.length) fail(`prosa ${id}: periode ${i + 1} tanpa bagian cerita`);
+    for (const s of p.scenes) if (!s.title.trim() || !s.text.trim()) fail(`prosa ${id}: periode ${i + 1} bagian kosong`);
+  });
+}
 for (const c of civilizations) {
   c.territories.forEach((t, i) => {
     if (!t.chronicle?.length) fail(`${c.id}: periode ${i + 1} tanpa kronik`);
@@ -74,6 +85,13 @@ for (const t of topics) {
 for (const r of tradeRoutes) if (r.path.length < 2) fail(`rute ${r.id}: kurang dari 2 titik`);
 
 console.log(`${topics.length} tema (${topicEntries} entri), ${civilizations.length} peradaban, ${events.length} peristiwa, ${people.length} tokoh, ${tradeRoutes.length} jalur dagang`);
+const words = (s?: string) => (s ? s.split(/\s+/).filter((w) => w && w !== '---').length : 0);
+const allScenes = civilizations.flatMap((c) => c.territories.flatMap((t) => t.scenes ?? []));
+const allEntries = topics.flatMap((t) => t.sections.flatMap((s) => s.entries));
+console.log(
+  `rata-rata kata: pengantar periode ${Math.round(civilizations.flatMap((c) => c.territories).reduce((a, t) => a + words(t.story), 0) / civilizations.flatMap((c) => c.territories).length)}, ` +
+    `bagian cerita ${Math.round(allScenes.reduce((a, s) => a + words(s.text), 0) / allScenes.length)}, entri tema ${Math.round(allEntries.reduce((a, e) => a + words(e.text), 0) / allEntries.length)}`,
+);
 if (errors) {
   console.error(`${errors} masalah ditemukan`);
   process.exit(1);

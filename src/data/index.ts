@@ -32,6 +32,7 @@ import { nusantaraKingdoms } from './civs-nusantara-kingdoms';
 import { chroniclesNusantaraKingdoms } from './chronicles-nusantara-kingdoms';
 import { storiesNusantaraKingdoms } from './stories-nusantara-kingdoms';
 import { eventsExtra } from './events-extra';
+import { proseBook } from './prose';
 import { peopleExtra } from './people-extra';
 
 /** Kronik periode yang ditulis terpisah dari file peradaban. */
@@ -61,13 +62,16 @@ export const storyBook: StoryBook = {
 const withChronicles = (c: Civilization): Civilization => {
   const book = chronicleBook[c.id];
   const stories = storyBook[c.id];
-  if (!book && !stories) return c;
+  const prose = proseBook[c.id];
+  if (!book && !stories && !prose) return c;
   return {
     ...c,
     territories: c.territories.map((t, i) => {
       const d = book?.[i];
       const merged = d ? { ...t, ...d, note: t.note ?? d.note } : t;
-      return stories?.[i] ? { ...merged, scenes: stories[i] } : merged;
+      const withScenes = stories?.[i] ? { ...merged, scenes: stories[i] } : merged;
+      const long = prose?.[i];
+      return long ? { ...withScenes, story: long.story, scenes: long.scenes } : withScenes;
     }),
   };
 };
@@ -88,5 +92,7 @@ export const civilizations: Civilization[] = [
 export const events = [...eventsAncient, ...eventsModern, ...eventsExtra].sort((a, b) => a.year - b.year);
 export const people = [...peopleBase, ...peopleExtra];
 export { tradeRoutes, eras };
+
+export { proseBook };
 
 export const civById = new Map(civilizations.map((c) => [c.id, c]));
