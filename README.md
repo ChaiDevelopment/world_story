@@ -27,6 +27,12 @@ npm run preview    # layani hasil build di http://localhost:4173
 - **Panel peradaban**: tab Ringkasan, Perdagangan, Tokoh, Peristiwa, Sumber.
 - **Drawer "Sezaman"** di dalam panel peradaban: geser slider untuk memilih tahun di dalam rentang peradaban itu, lalu lihat peristiwa, peradaban lain, dan tokoh yang sezaman. Tarik grip di tepi bawah untuk mengubah tinggi drawer. Tombol "Tampilkan di peta" menyinkronkan timeline utama.
 
+- **Jelajah tema**: 13 halaman tema, yaitu Suku Bangsa, Warisan Budaya, Agama Nusantara, Islam Nusantara, Pergerakan Nasional, Revolusi Kemerdekaan, Prasejarah Manusia, Agama-Agama Dunia, Islam Dunia, Sains & Penemuan, Zaman Revolusi, Dua Perang Dunia, dan Perang Dingin.
+
+## Isi data
+
+66 peradaban (termasuk Oseania dan 18 kerajaan/negara Nusantara), masing-masing dengan kronik dan cerita per periode; 13 tema (±550 entri); ±230 peristiwa; ±150 tokoh. Narasi ditulis dengan gaya bercerita tetapi tetap mengikuti sumber. Tahun perkiraan ditandai ±, dan hal yang diperdebatkan disebut terang-terangan.
+
 ## Struktur
 
 ```
